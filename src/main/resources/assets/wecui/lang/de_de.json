@@ -15,8 +15,8 @@
     "worldeditcui.color.cylindergrid": "Zylinder Rasterfarbe",
     "worldeditcui.color.cylinderedge": "Zylinder Randfarbe",
     "worldeditcui.color.cylinderpoint": "Zylinder Mittelpunktfarbe",
-    "worldeditcui.options.compat.title": "Kompatibilit\u00e4tsoptionen",
+    "worldeditcui.options.compat.title": "Kompatibilitätsoptionen",
     "worldeditcui.options.compat.spammy": "Promiskuitiver Modus (sende /we cui die ganze Zeit)",
-    "worldeditcui.options.compat.ontop": "Immer im Vordergrund (Mod Kompatibilit\u00e4t)",
+    "worldeditcui.options.compat.ontop": "Immer im Vordergrund (Mod Kompatibilität)",
     "worldeditcui.options.colours.title": "Anzeigefarben"
 }
