@@ -34,12 +34,12 @@ public final class FabricModWorldEditCUI implements ModInitializer {
     private static FabricModWorldEditCUI instance;
     public static final Identifier CHANNEL_WECUI = new Identifier("worldedit", "cui");
 
-    private final Identifier keybindToggleUIId = new Identifier("wecui", "keys.toggle");
-    private final Identifier keybindClearSelId = new Identifier("wecui", "keys.clear");
-    private final Identifier keybindChunkBorderId = new Identifier("wecui", "keys.chunk");
-    private final FabricKeyBinding keyBindToggleUI = FabricKeyBinding.Builder.create(keybindToggleUIId, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "wecui.keys.category").build();
-    private final FabricKeyBinding keyBindClearSel = FabricKeyBinding.Builder.create(keybindClearSelId, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "wecui.keys.category").build();
-    private final FabricKeyBinding keyBindChunkBorder = FabricKeyBinding.Builder.create(keybindChunkBorderId, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "wecui.keys.category").build();
+    private final Identifier keybindToggleUIId = new Identifier("worldeditcui", "toggle");
+    private final Identifier keybindClearSelId = new Identifier("worldeditcui", "clear");
+    private final Identifier keybindChunkBorderId = new Identifier("worldeditcui", "chunk");
+    private final FabricKeyBinding keyBindToggleUI = FabricKeyBinding.Builder.create(keybindToggleUIId, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.worldeditcui").build();
+    private final FabricKeyBinding keyBindClearSel = FabricKeyBinding.Builder.create(keybindClearSelId, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.worldeditcui").build();
+    private final FabricKeyBinding keyBindChunkBorder = FabricKeyBinding.Builder.create(keybindChunkBorderId, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.categories.worldeditcui").build();
 
     private WorldEditCUI controller;
     private CUIListenerWorldRender worldRenderListener;
@@ -57,7 +57,7 @@ public final class FabricModWorldEditCUI implements ModInitializer {
         instance = this;
 
         // Register keybindings
-        KeyBindingRegistry.INSTANCE.addCategory("wecui.keys.category");
+        KeyBindingRegistry.INSTANCE.addCategory("key.categories.worldeditcui");
         KeyBindingRegistry.INSTANCE.register(keyBindToggleUI);
         KeyBindingRegistry.INSTANCE.register(keyBindClearSel);
         KeyBindingRegistry.INSTANCE.register(keyBindChunkBorder);

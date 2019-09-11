@@ -1,0 +1,22 @@
+{
+    "worldeditcui.options.title": "WorldEditCUI\u9009\u9879",
+    "key.worldeditcui.toggle": "\u663e\u793a/\u9690\u85cf WECUI",
+    "key.worldeditcui.clear": "\u53d6\u6d88WorldEdit\u9009\u62e9\u533a\u57df",
+    "key.categories.worldeditcui": "WorldEditCUI\u6309\u952e\u8bbe\u7f6e",
+    "worldeditcui.color.cuboidedge": "\u957f\u65b9\u4f53\u8fb9\u7f18\u989c\u8272",
+    "worldeditcui.color.cuboidgrid": "\u957f\u65b9\u4f53\u7f51\u683c\u989c\u8272",
+    "worldeditcui.color.cuboidpoint1": "\u957f\u65b9\u4f53\u7b2c\u4e00\u70b9\u989c\u8272",
+    "worldeditcui.color.cuboidpoint2": "\u957f\u65b9\u4f53\u7b2c\u4e8c\u70b9\u989c\u8272",
+    "worldeditcui.color.polygrid": "\u591a\u8fb9\u5f62\u7f51\u683c\u989c\u8272",
+    "worldeditcui.color.polyedge": "\u591a\u8fb9\u5f62\u8fb9\u7f18\u989c\u8272",
+    "worldeditcui.color.polypoint": "\u591a\u8fb9\u5f62\u70b9\u989c\u8272",
+    "worldeditcui.color.ellipsoidgrid": "\u692d\u7403\u5f62\u7f51\u683c\u989c\u8272",
+    "worldeditcui.color.ellipsoidpoint": "\u692d\u7403\u5f62\u4e2d\u5fc3\u70b9\u989c\u8272",
+    "worldeditcui.color.cylindergrid": "\u5706\u67f1\u5f62\u7f51\u683c\u989c\u8272",
+    "worldeditcui.color.cylinderedge": "\u5706\u67f1\u5f62\u8fb9\u7f18\u989c\u8272",
+    "worldeditcui.color.cylinderpoint": "\u5706\u67f1\u5f62\u4e2d\u5fc3\u70b9\u989c\u8272",
+    "worldeditcui.options.compat.title": "\u517c\u5bb9\u6027\u9009\u9879",
+    "worldeditcui.options.compat.spammy": "\u6df7\u6742\u6a21\u5f0f(\u59cb\u7ec8\u53d1\u9001/we cui\u547d\u4ee4)",
+    "worldeditcui.options.compat.ontop": "\u59cb\u7ec8\u5728\u524d\u9762(mod\u517c\u5bb9\u9009\u9879)",
+    "worldeditcui.options.colours.title": "\u663e\u793a\u989c\u8272"
+}

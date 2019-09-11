@@ -18,20 +18,20 @@ import net.minecraft.client.resource.language.I18n;
  */
 public enum ConfiguredColour
 {
-	CUBOIDBOX      ("colour.cuboidedge",     new Colour("#CC3333CC")),
-	CUBOIDGRID     ("colour.cuboidgrid",     new Colour("#CC4C4CCC")),
-	CUBOIDPOINT1   ("colour.cuboidpoint1",   new Colour("#33CC33CC")),
-	CUBOIDPOINT2   ("colour.cuboidpoint2",   new Colour("#3333CCCC")),
-	POLYGRID       ("colour.polygrid",       new Colour("#CC3333CC")),
-	POLYBOX        ("colour.polyedge",       new Colour("#CC4C4CCC")),
-	POLYPOINT      ("colour.polypoint",      new Colour("#33CCCCCC")),
-	ELLIPSOIDGRID  ("colour.ellipsoidgrid",  new Colour("#CC4C4CCC")),
-	ELLIPSOIDCENTRE("colour.ellipsoidpoint", new Colour("#CCCC33CC")),
-	CYLINDERGRID   ("colour.cylindergrid",   new Colour("#CC3333CC")),
-	CYLINDERBOX    ("colour.cylinderedge",   new Colour("#CC4C4CCC")),
-	CYLINDERCENTRE ("colour.cylinderpoint",  new Colour("#CC33CCCC")),
-	CHUNKBOUNDARY  ("colour.chunkboundary",  new Colour("#33CC33CC")),
-	CHUNKGRID      ("colour.chunkgrid",      new Colour("#4CCCAA99"));
+	CUBOIDBOX      ("cuboidedge",     new Colour("#CC3333CC")),
+	CUBOIDGRID     ("cuboidgrid",     new Colour("#CC4C4CCC")),
+	CUBOIDPOINT1   ("cuboidpoint1",   new Colour("#33CC33CC")),
+	CUBOIDPOINT2   ("cuboidpoint2",   new Colour("#3333CCCC")),
+	POLYGRID       ("polygrid",       new Colour("#CC3333CC")),
+	POLYBOX        ("polyedge",       new Colour("#CC4C4CCC")),
+	POLYPOINT      ("polypoint",      new Colour("#33CCCCCC")),
+	ELLIPSOIDGRID  ("ellipsoidgrid",  new Colour("#CC4C4CCC")),
+	ELLIPSOIDCENTRE("ellipsoidpoint", new Colour("#CCCC33CC")),
+	CYLINDERGRID   ("cylindergrid",   new Colour("#CC3333CC")),
+	CYLINDERBOX    ("cylinderedge",   new Colour("#CC4C4CCC")),
+	CYLINDERCENTRE ("cylinderpoint",  new Colour("#CC33CCCC")),
+	CHUNKBOUNDARY  ("chunkboundary",  new Colour("#33CC33CC")),
+	CHUNKGRID      ("chunkgrid",      new Colour("#4CCCAA99"));
 	
 	class Style implements RenderStyle
 	{
@@ -82,7 +82,7 @@ public enum ConfiguredColour
 	
 	public String getDisplayName()
 	{
-		return I18n.translate(this.displayName);
+		return I18n.translate("worldeditcui.color." + this.displayName);
 	}
 	
 	public RenderStyle style()

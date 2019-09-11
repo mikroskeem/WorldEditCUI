@@ -1,0 +1,22 @@
+{
+    "worldeditcui.options.title": "WorldEditCUI Optionen",
+    "key.worldeditcui.toggle": "CUI Sichtbarkeit An/Aus",
+    "key.worldeditcui.clear": "WorldEdit Auswahl aufheben",
+    "key.categories.worldeditcui": "WorldEditCUI",
+    "worldeditcui.color.cuboidedge": "Quader Randfarbe",
+    "worldeditcui.color.cuboidgrid": "Quader Rasterfarbe",
+    "worldeditcui.color.cuboidpoint1": "1. Quader Auswahlpunkt Farbe",
+    "worldeditcui.color.cuboidpoint2": "2. Quader Auswahlpunkt Farbe",
+    "worldeditcui.color.polygrid": "Polygon Rasterfarbe",
+    "worldeditcui.color.polyedge": "Polygon Randfarbe",
+    "worldeditcui.color.polypoint": "Polygon Punktfarbe",
+    "worldeditcui.color.ellipsoidgrid": "Ellipsoid Rasterfarbe",
+    "worldeditcui.color.ellipsoidpoint": "Ellipsoid Mittelpunktfarbe",
+    "worldeditcui.color.cylindergrid": "Zylinder Rasterfarbe",
+    "worldeditcui.color.cylinderedge": "Zylinder Randfarbe",
+    "worldeditcui.color.cylinderpoint": "Zylinder Mittelpunktfarbe",
+    "worldeditcui.options.compat.title": "Kompatibilit\u00e4tsoptionen",
+    "worldeditcui.options.compat.spammy": "Promiskuitiver Modus (sende /we cui die ganze Zeit)",
+    "worldeditcui.options.compat.ontop": "Immer im Vordergrund (Mod Kompatibilit\u00e4t)",
+    "worldeditcui.options.colours.title": "Anzeigefarben"
+}

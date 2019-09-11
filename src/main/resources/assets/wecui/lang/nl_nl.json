@@ -1,0 +1,22 @@
+{
+    "worldeditcui.options.title": "WorldEditCUI Opties",
+    "key.worldeditcui.toggle": "CUI zichtbaarheid omschakelen",
+    "key.worldeditcui.clear": "WorldEdit selectie verwijderen",
+    "key.categories.worldeditcui": "WorldEditCUI",
+    "worldeditcui.color.cuboidedge": "Randkleur Balk",
+    "worldeditcui.color.cuboidgrid": "Roosterkleur Balk",
+    "worldeditcui.color.cuboidpoint1": "Eerste punt kleur Balk",
+    "worldeditcui.color.cuboidpoint2": "Tweede punt kleur Balk",
+    "worldeditcui.color.polygrid": "Roosterkleur Veelhoek",
+    "worldeditcui.color.polyedge": "Randkleur Veelhoek",
+    "worldeditcui.color.polypoint": "Puntkleur Veelhoek",
+    "worldeditcui.color.ellipsoidgrid": "Roosterkleur Ellipso\u00efde",
+    "worldeditcui.color.ellipsoidpoint": "Centrumpuntkleur Ellipso\u00efde",
+    "worldeditcui.color.cylindergrid": "Roosterkleur Cilinder",
+    "worldeditcui.color.cylinderedge": "Randkleur Cilinder",
+    "worldeditcui.color.cylinderpoint": "Centrumpuntkleur Cilinder",
+    "worldeditcui.options.compat.title": "Compatibiliteitsopties",
+    "worldeditcui.options.compat.spammy": "Veel-modus (heel de tijd /we cui verzenden)",
+    "worldeditcui.options.compat.ontop": "Altijd bovenaan (mod-compatibiliteit)",
+    "worldeditcui.options.colours.title": "Opties voor kleuren"
+}
