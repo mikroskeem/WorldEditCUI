@@ -1,6 +1,7 @@
 package com.mumfrey.worldeditcui.render;
 
 import com.mumfrey.worldeditcui.config.Colour;
+import com.mumfrey.worldeditcui.render.ConfiguredColour.Style;
 import com.mumfrey.worldeditcui.render.RenderStyle.RenderType;
 import net.minecraft.client.resource.language.I18n;
 
