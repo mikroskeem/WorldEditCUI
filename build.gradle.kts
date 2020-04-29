@@ -10,7 +10,7 @@ val minecraftVersion = "1.15.2"
 val yarnVersion = "1.15.2+build.15:v2"
 val fabricLoaderVersion = "0.8.2+build.194"
 val fabricApiVersion = "0.7.1+build.301-1.15"
-val modmenuVersion = "1.10.2+build.32"
+val modmenuVersion = "1.10.2+build.35"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8

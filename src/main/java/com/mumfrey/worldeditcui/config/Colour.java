@@ -14,7 +14,8 @@ public class Colour
 	public Colour(String colour)
 	{
 		this.hex = this.defaultColour = colour;
-		this.update();
+		if(this.hex.length() == 9)
+			this.update();
 	}
 	
 	public Colour()
