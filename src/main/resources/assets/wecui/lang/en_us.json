@@ -23,5 +23,8 @@
     "worldeditcui.options.compat.ontop": "Always on top (mod compatibility)",
     "worldeditcui.options.color.title": "Display Colors",
     "worldeditcui.options.extra.title": "Advanced Options",
-    "worldeditcui.options.extra.clearall": "Clear displayed regions when <§aClear§r> is pressed"
+    "worldeditcui.options.extra.clearall": "Clear displayed regions when <§aClear§r> is pressed",
+    "worldeditcui.options.done": "Done",
+    "worldeditcui.options.debugMode": "Debug Mode",
+    "worldeditcui.options.ignoreUpdates": "Ignore Updates"
 }

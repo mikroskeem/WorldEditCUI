@@ -29,11 +29,23 @@ public class SettingsEntry extends AlwaysSelectedEntryListWidget.Entry<SettingsE
         RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
         String name = keyword;
         String trimmedName = name;
-        int maxNameWidth = rowWidth - 32 - 3;
+        int maxNameWidth = rowWidth / 2 - 40;
         if (this.client.textRenderer.getStringWidth(name) > maxNameWidth) {
-            trimmedName = this.client.textRenderer.trimToWidth(name, maxNameWidth - this.client.textRenderer.getStringWidth("...")) + "...";
+            trimmedName = this.client.textRenderer.trimToWidth(name, maxNameWidth);
+            int lengthTemp = 0; String temp1String = ""; String temp2String = "";
+            for(String text : name.split(" ")) {
+                if((text.length() + lengthTemp) <= trimmedName.length()) {
+                    lengthTemp += text.length();
+                    temp1String += text + " ";
+                } else {
+                    temp2String += text + " ";
+                }
+            }
+            this.client.textRenderer.draw(temp1String, x + 50, y - 4, 0xFFFFFF);
+            this.client.textRenderer.draw(temp2String, x + 50, y + 6, 0xFFFFFF);
+        } else {
+            this.client.textRenderer.draw(trimmedName, x + 50, y + 1, 0xFFFFFF);
         }
-        this.client.textRenderer.draw(trimmedName, x + 70, y + 1, 0xFFFFFF);
         this.widgetButton.y = y + 1;
         this.widgetButton.render(mouseX, mouseY, delta);
         this.resetButton.y = y + 1;

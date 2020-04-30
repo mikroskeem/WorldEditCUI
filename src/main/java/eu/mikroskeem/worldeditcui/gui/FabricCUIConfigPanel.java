@@ -2,10 +2,12 @@ package eu.mikroskeem.worldeditcui.gui;
 
 import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.config.Colour;
+import com.mumfrey.worldeditcui.render.ConfiguredColour;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
 import org.apache.logging.log4j.LogManager;
 
@@ -25,7 +27,7 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
     private SettingsWidget configList;
     private AbstractButtonWidget done;
 
-    private static final String screenTitle = "WorldEditCUI Configuration";
+    private final String screenTitle;
 
     private static final int BUTTONHEIGHT = 20;
 
@@ -34,6 +36,7 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
         this.parent = parent;
         this.configuration = configuration;
         this.options = this.configuration.getConfigArray().keySet();
+        this.screenTitle = I18n.translate("worldeditcui.options.title");
     }
 
     @Override
@@ -47,7 +50,7 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
     protected void init() {
         configList = new SettingsWidget(this.minecraft, this.width - 8, this.height, 48 + 19, this.height - 36, 25, this.configuration, this);
         configList.setLeftPos(0);
-        done = this.addButton(new AbstractButtonWidget(this.width / 2 - 205, this.height - 27, 70, 20, "Done") {
+        done = this.addButton(new AbstractButtonWidget(this.width / 2 - 205, this.height - 27, 70, 20, I18n.translate("worldeditcui.options.done")) {
             @Override
             public void onClick(double mouseX, double mouseY) {
                 for (AbstractButtonWidget button : buttons) {
@@ -68,6 +71,7 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
             int buttonX = this.width - 140 - 20;
             Object value = configuration.getConfigArray().get(text);
             AbstractButtonWidget element;
+            String textTemp = configuration.getDefaultDisplayName(text);
             if (value == null) {
                 LogManager.getLogger().warn("value null, adding nothing");
                 continue;
@@ -119,7 +123,7 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
                 LogManager.getLogger().warn("WorldEditCUI has option "+text+" with data type "+value.getClass().getName());
                 continue;
             }
-            this.configList.addEntry(new SettingsEntry(this.configList, text, element, this.addButton(new AbstractButtonWidget(buttonX + 75, y, BUTTONHEIGHT, BUTTONHEIGHT, "") {
+            this.configList.addEntry(new SettingsEntry(this.configList, (textTemp != null) ? textTemp : text, element, this.addButton(new AbstractButtonWidget(buttonX + 75, y, BUTTONHEIGHT, BUTTONHEIGHT, "") {
                 @Override
                 public void onClick(double mouseX, double mouseY) {
                     configuration.changeValue(text, configuration.getDefaultValue(text));
