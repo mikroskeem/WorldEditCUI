@@ -5,6 +5,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
 
+import java.util.StringTokenizer;
+
 /**
  * @author Jesús Sanz - Modified to implement Config GUI / First Version
  */
@@ -30,25 +32,27 @@ public class SettingsEntry extends AlwaysSelectedEntryListWidget.Entry<SettingsE
         String name = keyword;
         String trimmedName = name;
         int maxNameWidth = rowWidth / 2 - 40;
-        if (this.client.textRenderer.getStringWidth(name) > maxNameWidth) {
-            trimmedName = this.client.textRenderer.trimToWidth(name, maxNameWidth);
-            int lengthTemp = 0; String temp1String = ""; String temp2String = "";
-            for(String text : name.split(" ")) {
-                if((text.length() + lengthTemp) <= trimmedName.length()) {
-                    lengthTemp += text.length();
-                    temp1String += text + " ";
-                } else {
-                    temp2String += text + " ";
-                }
+        StringTokenizer tok = new StringTokenizer(name, " ");
+        StringBuilder outputName = new StringBuilder(name.length());
+        int lineLength = 0;
+        while(tok.hasMoreElements()) {
+            String word = tok.nextToken();
+
+            if(lineLength + this.client.textRenderer.getStringWidth(word) + this.client.textRenderer.getStringWidth(" ") > maxNameWidth) {
+                outputName.append("\n");
+                lineLength = 0;
             }
-            this.client.textRenderer.draw(temp1String, x + 50, y - 4, 0xFFFFFF);
-            this.client.textRenderer.draw(temp2String, x + 50, y + 6, 0xFFFFFF);
-        } else {
-            this.client.textRenderer.draw(trimmedName, x + 50, y + 1, 0xFFFFFF);
+            outputName.append(word + " ");
+            lineLength += this.client.textRenderer.getStringWidth(word);
         }
-        this.widgetButton.y = y + 1;
+        tok = new StringTokenizer(outputName.toString(), "\n");
+        lineLength = 6;
+        while(tok.hasMoreElements()) {
+            this.client.textRenderer.draw(tok.nextToken(), x + 50, y + lineLength, 0xFFFFFF);
+            lineLength -= 10;
+        }
+        this.widgetButton.y = this.resetButton.y = y + 1;
         this.widgetButton.render(mouseX, mouseY, delta);
-        this.resetButton.y = y + 1;
         this.resetButton.render(mouseX, mouseY, delta);
     }
 
