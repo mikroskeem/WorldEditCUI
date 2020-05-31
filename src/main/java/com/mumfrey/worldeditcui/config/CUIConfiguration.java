@@ -202,7 +202,7 @@ public final class CUIConfiguration implements InitialisationFactory
 		cylinderPointColor 		= (Colour) 	configArray.get("cylinderPointColor");
 		chunkBoundaryColour 	= (Colour) 	configArray.get("chunkBoundaryColour");
 		chunkGridColour 		= (Colour) 	configArray.get("chunkGridColour");
-		this.save();
+		this.initialise();
 	}
 
 	public Object getDefaultValue(String text) {
