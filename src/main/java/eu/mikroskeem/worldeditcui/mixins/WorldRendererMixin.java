@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class WorldRendererMixin {
     @Inject(method = "render", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/render/WorldRenderer;renderWorldBorder(Lnet/minecraft/client/render/Camera;)V",
+            target = "Lnet/minecraft/client/render/WorldRenderer;renderChunkDebugInfo(Lnet/minecraft/client/render/Camera;)V",
             shift = At.Shift.BEFORE
     ))
     private void afterRenderEntities(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline,
