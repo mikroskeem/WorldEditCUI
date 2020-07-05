@@ -1,5 +1,7 @@
 {
     "worldeditcui.options.title": "WorldEditCUI Options",
+    "worldeditcui.options.category.flags": "Flags",
+    "worldeditcui.options.category.colours": "Colours",
     "key.worldeditcui.toggle": "Toggle CUI visibility",
     "key.worldeditcui.clear": "Clear WorldEdit selection",
     "key.worldeditcui.chunk": "Toggle Chunk Border",
@@ -23,7 +25,7 @@
     "worldeditcui.options.compat.ontop": "Always on top (mod compatibility)",
     "worldeditcui.options.color.title": "Display Colors",
     "worldeditcui.options.extra.title": "Advanced Options",
-    "worldeditcui.options.extra.clearall": "Clear displayed regions when <§aClear§r> is pressed",
+    "worldeditcui.options.extra.clearall": "Clear displayed regions when <%s> is pressed",
     "worldeditcui.options.done": "Done",
     "worldeditcui.options.debugMode": "Debug Mode",
     "worldeditcui.options.ignoreUpdates": "Ignore Updates"

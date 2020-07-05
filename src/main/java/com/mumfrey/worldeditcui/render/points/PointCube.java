@@ -1,6 +1,6 @@
 package com.mumfrey.worldeditcui.render.points;
 
-import com.mumfrey.worldeditcui.render.ConfiguredColour;
+import com.mumfrey.worldeditcui.config.ColourOption;
 import com.mumfrey.worldeditcui.render.RenderStyle;
 import com.mumfrey.worldeditcui.render.shapes.Render3DBox;
 import com.mumfrey.worldeditcui.util.BoundingBox;
@@ -10,7 +10,7 @@ import com.mumfrey.worldeditcui.util.Vector3;
 /**
  * Stores data about a cube surrounding a block in the world. Used to store info
  * about the selector blocks. Keeps track of colour, x/y/z values, and rendering
- * 
+ *
  * @author yetanotherx
  * @author lahwran
  * @author Adam Mummery-Smith
@@ -18,42 +18,42 @@ import com.mumfrey.worldeditcui.util.Vector3;
 public class PointCube extends Observable<BoundingBox>
 {
 	private static final double PADDING = 0.03;
-	
+
 	protected static final Vector3 MIN_VEC = new Vector3(PointCube.PADDING, PointCube.PADDING, PointCube.PADDING);
 	protected static final Vector3 MAX_VEC = new Vector3(PointCube.PADDING + 1, PointCube.PADDING + 1, PointCube.PADDING + 1);
 
 	protected int id;
 	protected Vector3 point;
-	protected RenderStyle style = ConfiguredColour.CUBOIDPOINT1.style();
-	
+	protected RenderStyle style = ColourOption.CUBOIDPOINT1.style();
+
 	protected Render3DBox box;
-	
+
 	public PointCube(double x, double y, double z)
 	{
 		this(new Vector3(x, y, z));
 	}
-	
+
 	public PointCube(Vector3 point)
 	{
 		this.setPoint(point);
 	}
-	
+
 	public boolean isDynamic()
 	{
 		return false;
 	}
-	
+
 	public PointCube setId(int id)
 	{
 		this.id = id;
 		return this;
 	}
-	
+
 	public int getId()
 	{
 		return this.id;
 	}
-	
+
 	public void render(Vector3 cameraPos)
 	{
 		this.box.render(cameraPos);
@@ -67,7 +67,7 @@ public class PointCube extends Observable<BoundingBox>
 	{
 		return this.point;
 	}
-	
+
 	public void setPoint(Vector3 point)
 	{
 		this.point = point;
@@ -78,7 +78,7 @@ public class PointCube extends Observable<BoundingBox>
 	{
 		return this.style;
 	}
-	
+
 	public PointCube setStyle(RenderStyle style)
 	{
 		this.style = style;

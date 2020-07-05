@@ -1,7 +1,7 @@
 package com.mumfrey.worldeditcui.render.region;
 
 import com.mumfrey.worldeditcui.WorldEditCUI;
-import com.mumfrey.worldeditcui.render.ConfiguredColour;
+import com.mumfrey.worldeditcui.config.ColourOption;
 import com.mumfrey.worldeditcui.render.points.PointCube;
 import com.mumfrey.worldeditcui.render.points.PointCubeTracking;
 import com.mumfrey.worldeditcui.render.shapes.Render3DBox;
@@ -12,7 +12,7 @@ import net.minecraft.entity.Entity;
 
 /**
  * Main controller for a cuboid-type region
- * 
+ *
  * @author yetanotherx
  * @author lahwran
  * @author Adam Mummery-Smith
@@ -20,17 +20,17 @@ import net.minecraft.entity.Entity;
 public class CuboidRegion extends Region
 {
 	private PointCube[] points = new PointCube[2];
-	
+
 	private Render3DGrid grid;
 	private Render3DBox box;
-	
+
 	private double spacing = 1.0;
-	
+
 	public CuboidRegion(WorldEditCUI controller)
 	{
-		super(controller, ConfiguredColour.CUBOIDBOX.style(), ConfiguredColour.CUBOIDGRID.style(), ConfiguredColour.CUBOIDPOINT1.style(), ConfiguredColour.CUBOIDPOINT2.style());
+		super(controller, ColourOption.CUBOIDBOX.style(), ColourOption.CUBOIDGRID.style(), ColourOption.CUBOIDPOINT1.style(), ColourOption.CUBOIDPOINT2.style());
 	}
-	
+
 	@Override
 	public void render(Vector3 cameraPos, float partialTicks)
 	{
@@ -38,10 +38,10 @@ public class CuboidRegion extends Region
 		{
 			this.points[0].updatePoint(partialTicks);
 			this.points[1].updatePoint(partialTicks);
-			
+
 			this.grid.render(cameraPos);
 			this.box.render(cameraPos);
-			
+
 			this.points[0].render(cameraPos);
 			this.points[1].render(cameraPos);
 		}
@@ -56,7 +56,7 @@ public class CuboidRegion extends Region
 			this.points[1].render(cameraPos);
 		}
 	}
-	
+
 	@Override
 	public void setGridSpacing(double spacing)
 	{
@@ -66,7 +66,7 @@ public class CuboidRegion extends Region
 			this.grid.setSpacing(spacing);
 		}
 	}
-	
+
 	@Override
 	public void setCuboidPoint(int id, double x, double y, double z)
 	{
@@ -74,10 +74,10 @@ public class CuboidRegion extends Region
 		{
 			this.points[id] = new PointCube(x, y, z).setStyle(this.styles[id+2]);
 		}
-		
+
 		this.updateBounds();
 	}
-	
+
 	@Override
 	public void setCuboidVertexLatch(int id, Entity entity, double traceDistance)
 	{
@@ -85,7 +85,7 @@ public class CuboidRegion extends Region
 		{
 			this.points[id] = new PointCubeTracking(entity, traceDistance).setStyle(this.styles[id+2]);
 		}
-		
+
 		this.updateBounds();
 	}
 
@@ -98,7 +98,7 @@ public class CuboidRegion extends Region
 			this.box = new Render3DBox(this.styles[0], bounds);
 		}
 	}
-	
+
 	@Override
 	protected void updateStyles()
 	{
@@ -106,23 +106,23 @@ public class CuboidRegion extends Region
 		{
 			this.box.setStyle(this.styles[0]);
 		}
-		
+
 		if (this.grid != null)
 		{
 			this.grid.setStyle(this.styles[1]);
 		}
-		
+
 		if (this.points[0] != null)
 		{
 			this.points[0].setStyle(this.styles[2]);
 		}
-		
+
 		if (this.points[1] != null)
 		{
 			this.points[1].setStyle(this.styles[3]);
 		}
 	}
-	
+
 	@Override
 	public RegionType getType()
 	{
