@@ -1,7 +1,5 @@
 {
     "worldeditcui.options.title": "WorldEditCUI Optionen",
-    "worldeditcui.options.category.flags": "Optionen",
-    "worldeditcui.options.category.colours": "Farben",
     "key.worldeditcui.toggle": "CUI Sichtbarkeit An/Aus",
     "key.worldeditcui.clear": "WorldEdit Auswahl aufheben",
     "key.categories.worldeditcui": "WorldEditCUI",
@@ -20,5 +18,5 @@
     "worldeditcui.options.compat.title": "Kompatibilitätsoptionen",
     "worldeditcui.options.compat.spammy": "Promiskuitiver Modus (sende /we cui die ganze Zeit)",
     "worldeditcui.options.compat.ontop": "Immer im Vordergrund (Mod Kompatibilität)",
-    "worldeditcui.options.color.title": "Anzeigefarben"
+    "worldeditcui.options.category.main.colours": "Anzeigefarben"
 }

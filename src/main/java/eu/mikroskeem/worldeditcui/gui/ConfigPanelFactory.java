@@ -38,18 +38,18 @@ public final class ConfigPanelFactory implements ModMenuApi {
             FabricModWorldEditCUI.getInstance().getController().getConfiguration().save();
         });
 
-        final ConfigCategory main = builder.getOrCreateCategory(tr("options.title"));
         final ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+        final ConfigCategory main = builder.getOrCreateCategory(tr("options.category.main"));
 
-        final SubCategoryBuilder colours = entryBuilder.startSubCategory(tr("options.category.colours"))
-                .setExpanded(true);
+
+        final SubCategoryBuilder colours = entryBuilder.startSubCategory(tr("options.category.main.colours"));
         for (ColourOption colour : ColourOption.values()) {
             colours.add(buildEntry(builder.entryBuilder(), colour));
         }
+        colours.setExpanded(true);
         main.addEntry(colours.build());
 
-        final SubCategoryBuilder flags = entryBuilder.startSubCategory(tr("options.category.flags"))
-                .setExpanded(true);
+        final SubCategoryBuilder flags = entryBuilder.startSubCategory(tr("options.category.main.flags"));
         for (FlagOption flag : FlagOption.values()) {
             flags.add(buildEntry(builder.entryBuilder(), flag));
         }

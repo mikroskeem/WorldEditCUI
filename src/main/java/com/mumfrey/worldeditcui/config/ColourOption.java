@@ -167,6 +167,6 @@ public enum ColourOption implements Option<Colour>
 	private void updateLines()
 	{
 		this.lines[1] = this.normal = new LineStyle(RenderType.VISIBLE, 3.0f, this.colour.red(), this.colour.green(), this.colour.blue(), this.colour.alpha());
-		this.lines[0] = this.hidden = new LineStyle(RenderType.HIDDEN, 3.0f, this.colour.red() * 0.75F, this.colour.green() * 0.75F, this.colour.blue() * 0.75F, this.colour.alpha() * 0.25F);
+		this.lines[0] = this.hidden = new LineStyle(RenderType.HIDDEN, 3.0f, this.colour.red() * 0.50F, this.colour.green() * 0.50F, this.colour.blue() * 0.50F, this.colour.alpha() * 0.20F);
 	}
 }
