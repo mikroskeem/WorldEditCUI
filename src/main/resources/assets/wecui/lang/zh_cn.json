@@ -18,5 +18,5 @@
     "worldeditcui.options.compat.title": "兼容性选项",
     "worldeditcui.options.compat.spammy": "混杂模式(始终发送/we cui命令)",
     "worldeditcui.options.compat.ontop": "始终在前面(mod兼容选项)",
-    "worldeditcui.options.color.title": "显示颜色"
+    "worldeditcui.options.category.main.colours": "显示颜色"
 }

@@ -37,10 +37,17 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
     modImplementation("io.github.prospector:modmenu:$modmenuVersion")
     compileOnly("com.google.code.findbugs:jsr305:3.0.2") // compiler will crash without?
+    include(modApi("me.shedaniel.cloth:config-2:4.6.0")!!)
 
     modImplementation("grondag:frex-mc116:3.1+") // for render event
 
-    modRuntime("com.sk89q.worldedit:worldedit-fabric-mc$minecraftVersion:7.2.0-SNAPSHOT") // for development environment
+    // for development environment
+    modRuntime("com.sk89q.worldedit:worldedit-fabric-mc$minecraftVersion:7.2.0-SNAPSHOT") {
+        exclude("com.google.guava")
+        exclude(group = "com.google.code.gson")
+        exclude(group = "it.unimi.dsi")
+        exclude(group = "org.apache.logging.log4j")
+    }
 }
 
 val processResources by tasks.getting(ProcessResources::class) {
@@ -49,5 +56,11 @@ val processResources by tasks.getting(ProcessResources::class) {
     from(sourceSets["main"].resources.srcDirs) {
         include("fabric.mod.json")
         expand("version" to project.version)
+    }
+}
+
+tasks.jar.configure {
+    from(rootProject.file("LICENSE")) {
+        into("LICENSE_WorldEditCUI")
     }
 }

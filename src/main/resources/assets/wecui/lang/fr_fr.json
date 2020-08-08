@@ -1,5 +1,7 @@
 {
     "worldeditcui.options.title": "Options WorldEditCUI",
+    "worldeditcui.options.category.main.flags": "Options",
+    "worldeditcui.options.category.main.colours": "Couleurs",
     "key.worldeditcui.toggle": "Bascule Visibilité du CUI",
     "key.worldeditcui.clear": "Effacer la sélection WorldEdit",
     "key.categories.worldeditcui": "WorldEditCUI",

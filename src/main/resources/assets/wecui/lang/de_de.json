@@ -18,5 +18,5 @@
     "worldeditcui.options.compat.title": "Kompatibilitätsoptionen",
     "worldeditcui.options.compat.spammy": "Promiskuitiver Modus (sende /we cui die ganze Zeit)",
     "worldeditcui.options.compat.ontop": "Immer im Vordergrund (Mod Kompatibilität)",
-    "worldeditcui.options.color.title": "Anzeigefarben"
+    "worldeditcui.options.category.main.colours": "Anzeigefarben"
 }

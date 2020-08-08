@@ -1,7 +1,7 @@
 package eu.mikroskeem.worldeditcui;
 
 import com.mumfrey.worldeditcui.WorldEditCUI;
-import com.mumfrey.worldeditcui.config.CUIConfiguration;
+import com.mumfrey.worldeditcui.config.FlagOption;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerChannel;
 import com.mumfrey.worldeditcui.event.listeners.CUIListenerWorldRender;
 import eu.mikroskeem.worldeditcui.mixins.MinecraftClientAccess;
@@ -32,7 +32,6 @@ import java.nio.charset.StandardCharsets;
 public final class FabricModWorldEditCUI implements ModInitializer {
     private static final int DELAYED_HELO_TICKS = 10;
 
-    public static final String MOD_ID = "worldeditcui";
     private static FabricModWorldEditCUI instance;
     public static final Identifier CHANNEL_WECUI = new Identifier("worldedit", "cui");
 
@@ -61,7 +60,7 @@ public final class FabricModWorldEditCUI implements ModInitializer {
      * @return new, registered keybinding in the mod category
      */
     private static KeyBinding key(final String name, final InputUtil.Type type, final int code) {
-        return KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MOD_ID + '.' + name, type, code, KEYBIND_CATEGORY_WECUI));
+        return KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + WorldEditCUI.MOD_ID + '.' + name, type, code, KEYBIND_CATEGORY_WECUI));
     }
 
     public static RenderMode getRenderMode() {
@@ -83,14 +82,13 @@ public final class FabricModWorldEditCUI implements ModInitializer {
     }
 
     private void onTick(MinecraftClient mc) {
-        CUIConfiguration config = controller.getConfiguration();
         boolean inGame = mc.player != null;
         boolean clock = ((MinecraftClientAccess) mc).getRenderTickCounter().tickDelta > 0;
 
         if (inGame && mc.currentScreen == null) {
             while (this.keyBindToggleUI.wasPressed()) {
                 if (isPressed(mc, GLFW.GLFW_KEY_LEFT_SHIFT) || isPressed(mc, GLFW.GLFW_KEY_RIGHT_SHIFT)) {
-                    config.setAlwaysOnTop(!config.isAlwaysOnTop());
+                    FlagOption.ALWAYS_ON_TOP.value(!FlagOption.ALWAYS_ON_TOP.value());
                 } else {
                     this.visible = !this.visible;
                 }
@@ -101,7 +99,7 @@ public final class FabricModWorldEditCUI implements ModInitializer {
                     mc.player.sendChatMessage("//sel");
                 }
 
-                if (config.isClearAllOnKey()) {
+                if (FlagOption.CLEAR_ALL_ON_KEY.value()) {
                     controller.clearRegions();
                 }
             }
@@ -113,7 +111,7 @@ public final class FabricModWorldEditCUI implements ModInitializer {
 
         if (inGame && clock && controller != null) {
             if (activeRenderMode != RenderMode.FREX_POST_RENDER) {
-                activeRenderMode = config.isAlwaysOnTop() ? RenderMode.ALWAYS_ON_TOP : RenderMode.STANDARD;
+                activeRenderMode = FlagOption.ALWAYS_ON_TOP.value() ? RenderMode.ALWAYS_ON_TOP : RenderMode.STANDARD;
             }
 
             if (mc.world != this.lastWorld || mc.player != this.lastPlayer) {
@@ -124,7 +122,7 @@ public final class FabricModWorldEditCUI implements ModInitializer {
                 controller.clear();
                 this.helo();
                 this.delayedHelo = FabricModWorldEditCUI.DELAYED_HELO_TICKS;
-                if (mc.player != null && config.isPromiscuous()) {
+                if (mc.player != null && FlagOption.PROMISCUOUS.value()) {
                     mc.player.sendChatMessage("/we cui"); //Tricks WE to send the current selection
                 }
             }
