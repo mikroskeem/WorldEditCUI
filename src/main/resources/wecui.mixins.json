@@ -1,12 +1,11 @@
 {
   "required": true,
   "package": "eu.mikroskeem.worldeditcui.mixins",
-  "minVersion": "0.7.10",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [],
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_16",
   "client": [
-    "MinecraftClientAccess",
-    "RenderPhaseAccess"
+    "BufferRendererMixin",
+    "MinecraftClientAccess"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -7,8 +7,8 @@ import com.mumfrey.worldeditcui.render.points.PointRectangle;
 import com.mumfrey.worldeditcui.util.Vector2;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
-import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
@@ -53,8 +53,8 @@ public class Render2DGrid extends RenderRegion
 				continue;
 			}
 			
-			buf.begin(GL11.GL_LINE_LOOP, VertexFormats.POSITION);
-			line.applyColour();
+			buf.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
+			line.applyColour(buf);
 			for (PointRectangle point : this.points)
 			{
 				if (point != null)
@@ -64,6 +64,16 @@ public class Render2DGrid extends RenderRegion
 					double z = pos.getY() - ctx.cameraPos().getZ();
 					buf.vertex(x + 0.5, height - ctx.cameraPos().getY(), z + 0.5).next();
 				}
+			}
+
+			// Repeat of initial vertex for LINE_STRIP
+			final PointRectangle initialRepeat = this.points.get(0);
+			if (initialRepeat != null)
+			{
+				Vector2 pos = initialRepeat.getPoint();
+				double x = pos.getX() - ctx.cameraPos().getX();
+				double z = pos.getY() - ctx.cameraPos().getZ();
+				buf.vertex(x + 0.5, height - ctx.cameraPos().getY(), z + 0.5).next();
 			}
 			tessellator.draw();
 		}

@@ -1,6 +1,6 @@
 package com.mumfrey.worldeditcui.render.shapes;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mumfrey.worldeditcui.event.listeners.CUIRenderContext;
 import com.mumfrey.worldeditcui.render.LineStyle;
 import com.mumfrey.worldeditcui.render.RenderStyle;
@@ -8,10 +8,11 @@ import com.mumfrey.worldeditcui.util.BoundingBox;
 import com.mumfrey.worldeditcui.util.Observable;
 import com.mumfrey.worldeditcui.util.Vector3;
 import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Draws the grid for a region between
@@ -82,8 +83,9 @@ public class Render3DGrid extends RenderRegion
 
 		if (this.spacing != 1.0)
 		{
-			GlStateManager.disableCull();
-			
+			RenderSystem.disableCull();
+			RenderSystem.setShader(GameRenderer::getPositionColorShader);
+
 			double[] vertices = {
 					x1, y1, z1,  x2, y1, z1,  x2, y1, z2,  x1, y1, z2, // bottom
 					x1, y2, z1,  x2, y2, z1,  x2, y2, z2,  x1, y2, z2, // top
@@ -92,13 +94,13 @@ public class Render3DGrid extends RenderRegion
 					x1, y1, z1,  x1, y2, z1,  x2, y2, z1,  x2, y1, z1, // north
 					x1, y1, z2,  x2, y1, z2,  x2, y2, z2,  x1, y2, z2  // south
 			};
-			
+
 			for (LineStyle line : this.style.getLines())
 			{
 				if (line.prepare(this.style.getRenderType()))
 				{
-					buf.begin(GL11.GL_QUADS, VertexFormats.POSITION);
-					line.applyColour(0.25F);
+					buf.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+					line.applyColour(buf, 0.25F);
 					for (int i = 0; i < vertices.length; i += 3)
 					{
 						buf.vertex(vertices[i], vertices[i + 1], vertices[i + 2]).next();
@@ -107,7 +109,8 @@ public class Render3DGrid extends RenderRegion
 				}
 			}
 
-			GlStateManager.enableCull();
+			RenderSystem.setShader(GameRenderer::getRenderTypeLinesShader);
+			RenderSystem.enableCull();
 		}
 		
 		if (this.spacing < Render3DGrid.MIN_SPACING)
@@ -126,8 +129,8 @@ public class Render3DGrid extends RenderRegion
 				continue;
 			}
 			
-			buf.begin(GL11.GL_LINES, VertexFormats.POSITION);
-			line.applyColour();
+			buf.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION_COLOR);
+			line.applyColour(buf);
 
 			for (double y = Math.max(y1, -cullAtY) + OFFSET; y <= y2 + OFFSET && y <= cullAtY; y += this.spacing)
 			{

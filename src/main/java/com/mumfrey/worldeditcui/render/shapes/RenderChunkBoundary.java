@@ -1,6 +1,5 @@
 package com.mumfrey.worldeditcui.render.shapes;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mumfrey.worldeditcui.event.listeners.CUIRenderContext;
 import com.mumfrey.worldeditcui.render.LineStyle;
 import com.mumfrey.worldeditcui.render.RenderStyle;
@@ -8,11 +7,11 @@ import com.mumfrey.worldeditcui.util.Vector3;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.chunk.Chunk;
-import org.lwjgl.opengl.GL11;
 
 public class RenderChunkBoundary extends RenderRegion
 {
@@ -30,15 +29,14 @@ public class RenderChunkBoundary extends RenderRegion
 	}
 	
 	@Override
-	@SuppressWarnings("deprecation") // GLStateManager/immediate mode GL use
 	public void render(CUIRenderContext ctx)
 	{
-		double yMax = this.mc.world != null ? this.mc.world.getHeight() : 256.0;
-		double yMin = 0.0;
-		
+		double yMin = this.mc.world != null ? this.mc.world.getDimension().getMinimumY() : 0.0;
+		double yMax = this.mc.world != null ? this.mc.world.getDimension().getLogicalHeight() - yMin : 256.0;
+
 		long xBlock = MathHelper.floor(ctx.cameraPos().getX());
 		long zBlock = MathHelper.floor(ctx.cameraPos().getZ());
-		
+
 		int xChunk = (int)(xBlock >> 4);
 		int zChunk = (int)(zBlock >> 4);
 		
@@ -47,8 +45,9 @@ public class RenderChunkBoundary extends RenderRegion
 		
 		this.grid.setPosition(new Vector3(xBase - OFFSET, yMin, zBase - 16 - OFFSET), new Vector3(xBase + 16 + OFFSET, yMax, zBase + OFFSET));
 
-		GlStateManager.pushMatrix();
-		GlStateManager.translated(0.0, -ctx.cameraPos().getY(), 0.0);
+		ctx.matrices().push();
+		ctx.matrices().translate(0.0, -ctx.cameraPos().getY(), 0.0);
+		ctx.applyMatrices();
 
 		ctx.withCameraAt(Vector3.ZERO, this.grid::render);
 
@@ -59,7 +58,8 @@ public class RenderChunkBoundary extends RenderRegion
 			this.renderChunkBoundary(xChunk, zChunk, xBase, zBase);
 		}
 
-		GlStateManager.popMatrix();
+		ctx.matrices().pop();
+		ctx.applyMatrices();
 	}
 
 	private void renderChunkBorder(double yMin, double yMax, double xBase, double zBase)
@@ -73,9 +73,9 @@ public class RenderChunkBoundary extends RenderRegion
 		{
 			if (line.prepare(this.style.getRenderType()))
 			{
-				buf.begin(GL11.GL_LINES, VertexFormats.POSITION);
-				line.applyColour();
-				
+				buf.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION_COLOR);
+				line.applyColour(buf);
+
 				for (int x = -16; x <= 32; x += spacing)
 				{
 					for (int z = -16; z <= 32; z += spacing)
@@ -114,8 +114,8 @@ public class RenderChunkBoundary extends RenderRegion
 		{
 			if (line.prepare(this.style.getRenderType()))
 			{
-				buf.begin(GL11.GL_LINES, VertexFormats.POSITION);
-				line.applyColour();
+				buf.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION_COLOR);
+				line.applyColour(buf);
 
 				int[][] lastHeight = { { -1, -1 }, { -1, -1 } };
 				for (int i = 0, height = 0; i < 16; i++)

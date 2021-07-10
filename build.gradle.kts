@@ -1,18 +1,18 @@
 plugins {
     java
-    id("fabric-loom") version "0.7-SNAPSHOT"
+    id("fabric-loom") version "0.8-SNAPSHOT"
     id("com.github.ben-manes.versions") version "0.39.0"
 }
 
-val minecraftVersion = "1.16.5"
-val yarnVersion = "$minecraftVersion+build.5:v2"
-val fabricLoaderVersion = "0.11.1"
-val fabricApiVersion = "0.31.0+1.16"
-val modmenuVersion = "1.16.8"
+val minecraftVersion = "1.17-pre2"
+val yarnVersion = "$minecraftVersion+build.1:v2"
+val fabricLoaderVersion = "0.11.3"
+val fabricApiVersion = "0.34.8+1.17"
+val modmenuVersion = "2.0.2"
 val multiconnectVersion = "1.3.36"
 
 group = "com.mumfrey.worldeditcui"
-version = "$minecraftVersion+03-SNAPSHOT"
+version = "$minecraftVersion+01-SNAPSHOT"
 
 repositories {
     // mirrors:
@@ -21,20 +21,26 @@ repositories {
     // - https://files.minecraftforge.net/maven
     maven(url = "https://repo.stellardrift.ca/repository/stable/") {
         name = "stellardriftReleases"
-	mavenContent { releasesOnly() }
+        mavenContent { releasesOnly() }
+    }
+    mavenLocal {
+        content {
+            includeGroup("com.sk89q.worldedit")
+        }
     }
 }
 
-val targetVersion = 8
+val targetVersion = 16
 java {
     sourceCompatibility = JavaVersion.toVersion(targetVersion)
     targetCompatibility = sourceCompatibility
+    if (JavaVersion.current() < JavaVersion.toVersion(targetVersion)) {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(targetVersion))
+    }
 }
 
 tasks.withType(JavaCompile::class) {
-    if (JavaVersion.current().isJava10Compatible) {
-        options.release.set(targetVersion)
-    }
+    options.release.set(targetVersion)
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(listOf("-Xlint:all", "-Xlint:-processing"))
 }
@@ -54,11 +60,11 @@ dependencies {
         exclude(group = "it.unimi.dsi")
         exclude(group = "org.apache.logging.log4j")
     }*/
-    runtimeOnly("net.minecraftforge:forgeflower:latest.release")
+    runtimeOnly("net.minecraftforge:forgeflower:1.5.498.12")
 }
 
 tasks.withType(net.fabricmc.loom.task.AbstractRunTask::class).configureEach {
-    // Midxin debug options
+    // Mixin debug options
     jvmArgs(
         // "-Dmixin.debug.verbose=true",
         // "-Dmixin.debug.export=true",

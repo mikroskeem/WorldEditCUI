@@ -7,7 +7,7 @@ public class Colour
 {
 	private String hex;
 	private transient int argb;
-	private transient float a, r, g, b;
+	private transient int a, r, g, b;
 	private transient String defaultColour;
 	private transient boolean woken;
 	
@@ -105,10 +105,10 @@ public class Colour
 	{
 		String hex = this.getHex();
 		this.argb = (int)Long.parseLong(hex.substring(7, 9) + hex.substring(1, 7), 16);
-		this.r = ((Integer.parseInt(hex.substring(1, 3), 16)) / 256.0F);
-		this.g = ((Integer.parseInt(hex.substring(3, 5), 16)) / 256.0F);
-		this.b = ((Integer.parseInt(hex.substring(5, 7), 16)) / 256.0F);
-		this.a = ((Integer.parseInt(hex.substring(7, 9), 16)) / 256.0F);
+		this.r = Integer.parseInt(hex.substring(1, 3), 16) & 0xff;
+		this.g = Integer.parseInt(hex.substring(3, 5), 16) & 0xff;
+		this.b = Integer.parseInt(hex.substring(5, 7), 16) & 0xff;
+		this.a = Integer.parseInt(hex.substring(7, 9), 16) & 0xff;
 		this.woken = true;
 	}
 	
@@ -117,7 +117,7 @@ public class Colour
 		return this.argb;
 	}
 	
-	public float red()
+	public int red()
 	{
 		if (!this.woken)
 		{
@@ -127,7 +127,7 @@ public class Colour
 		return this.r;
 	}
 	
-	public float green()
+	public int green()
 	{
 		if (!this.woken)
 		{
@@ -137,7 +137,7 @@ public class Colour
 		return this.g;
 	}
 	
-	public float blue()
+	public int blue()
 	{
 		if (!this.woken)
 		{
@@ -147,7 +147,7 @@ public class Colour
 		return this.b;
 	}
 	
-	public float alpha()
+	public int alpha()
 	{
 		if (!this.woken)
 		{

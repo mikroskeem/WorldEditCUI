@@ -3,8 +3,10 @@ package eu.mikroskeem.worldeditcui.gui;
 import com.mumfrey.worldeditcui.config.CUIConfiguration;
 import com.mumfrey.worldeditcui.config.Colour;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.AbstractButtonWidget;
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
+import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
@@ -32,7 +34,7 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
     private final CUIConfiguration configuration;
     private double scrollPercent = 0;
     private SettingsWidget configList;
-    private AbstractButtonWidget done;
+    private ClickableWidget done;
 
     private final Text screenTitle;
 
@@ -57,13 +59,18 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
     protected void init() {
         configList = new SettingsWidget(this.client, this.width - 8, this.height, 48 + 19, this.height - 36, 25, this.configuration, this);
         configList.setLeftPos(0);
-        done = this.addButton(new AbstractButtonWidget(this.width / 2 - 205, this.height - 27, 70, 20, new TranslatableText("worldeditcui.options.done")) {
+        done = this.addDrawableChild(new ClickableWidget(this.width / 2 - 205, this.height - 27, 70, 20, new TranslatableText("worldeditcui.options.done")) {
+            @Override
+            public void appendNarrations(NarrationMessageBuilder builder) {
+                this.method_37021(builder);
+            }
+
             @Override
             public void onClick(double mouseX, double mouseY) {
-                for (AbstractButtonWidget button : buttons) {
-                    if (button instanceof TextFieldWidget) {
-                        if(button.isFocused()) {
-                            button.changeFocus(false);
+                for (Element button : children()) {
+                    if (button instanceof TextFieldWidget widget) {
+                        if(widget.isFocused()) {
+                            widget.changeFocus(false);
                         }
                     }
                 }
@@ -77,13 +84,18 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
         for (String text : options) {
             int buttonX = this.width - 140 - 20;
             Object value = configuration.getConfigArray().get(text);
-            AbstractButtonWidget element;
+            ClickableWidget element;
             TranslatableText textTemp = configuration.getDescription(text);
             if (value == null) {
                 LOGGER.warn("value null, adding nothing");
                 continue;
             } else if(value instanceof Boolean) {
-                element = this.addButton(new AbstractButtonWidget(buttonX, y, 70, BUTTONHEIGHT, ((Boolean) value ? TRUE: FALSE)) {
+                element = this.addDrawableChild(new ClickableWidget(buttonX, y, 70, BUTTONHEIGHT, ((Boolean) value ? TRUE: FALSE)) {
+                    @Override
+                    public void appendNarrations(NarrationMessageBuilder builder) {
+                        this.method_37021(builder);
+                    }
+
                     @Override
                     public void onClick(double mouseX, double mouseY) {
                         if ((Boolean) (configuration.getConfigArray().get(text))) {
@@ -101,7 +113,7 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
                     }
                 });
             } else if(value instanceof Colour) {
-                element = this.addButton(new TextFieldWidgetTemp(this.textRenderer, buttonX, y, 70, BUTTONHEIGHT, new LiteralText(((Colour)value).getHex()), ((Colour)value).getHex()) {
+                element = this.addDrawableChild(new TextFieldWidgetTemp(this.textRenderer, buttonX, y, 70, BUTTONHEIGHT, new LiteralText(((Colour)value).getHex()), ((Colour)value).getHex()) {
                     @Override
                     protected void onFocusedChanged(boolean bl) {
                         if (bl) {
@@ -130,7 +142,12 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
                 LOGGER.warn("WorldEditCUI has option " + text + " with data type " + value.getClass().getName());
                 continue;
             }
-            this.configList.addEntry(new SettingsEntry(this.configList, (textTemp != null) ? textTemp : new LiteralText(text), element, this.addButton(new AbstractButtonWidget(buttonX + 75, y, BUTTONHEIGHT, BUTTONHEIGHT, LiteralText.EMPTY) {
+            this.configList.addEntry(new SettingsEntry(this.configList, (textTemp != null) ? textTemp : new LiteralText(text), element, this.addDrawableChild(new ClickableWidget(buttonX + 75, y, BUTTONHEIGHT, BUTTONHEIGHT, LiteralText.EMPTY) {
+                @Override
+                public void appendNarrations(NarrationMessageBuilder builder) {
+                    this.method_37021(builder);
+                }
+
                 @Override
                 public void onClick(double mouseX, double mouseY) {
                     configuration.changeValue(text, configuration.getDefaultValue(text));
@@ -139,7 +156,7 @@ public class FabricCUIConfigPanel extends Screen implements Supplier<Screen> {
             })));
         }
         this.setFocused(null);
-        this.children.add(this.configList);
+        this.addDrawable(this.configList);
     }
 
     @Override

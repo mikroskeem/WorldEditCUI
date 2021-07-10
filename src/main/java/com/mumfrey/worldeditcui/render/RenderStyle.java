@@ -1,7 +1,7 @@
 package com.mumfrey.worldeditcui.render;
 
 import com.mumfrey.worldeditcui.config.Colour;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL32;
 
 /**
  * Render style adapter, can be one of the built-in {@link ConfiguredColour}s
@@ -19,17 +19,17 @@ public interface RenderStyle
 		/**
 		 * Render type to draw lines regardless of depth
 		 */
-		ANY(GL11.GL_ALWAYS),
+		ANY(GL32.GL_ALWAYS),
 		
 		/**
 		 * Render type for "hidden" lines (under world geometry)
 		 */
-		HIDDEN(GL11.GL_GEQUAL),
+		HIDDEN(GL32.GL_GEQUAL),
 		
 		/**
 		 * Render type for visible lines (over world geometry) 
 		 */
-		VISIBLE(GL11.GL_LESS);
+		VISIBLE(GL32.GL_LESS);
 		
 		final int depthFunc;
 

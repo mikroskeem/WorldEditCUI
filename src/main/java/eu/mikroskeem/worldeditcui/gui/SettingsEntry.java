@@ -1,8 +1,8 @@
 package eu.mikroskeem.worldeditcui.gui;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
+import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
@@ -20,10 +20,10 @@ public class SettingsEntry extends AlwaysSelectedEntryListWidget.Entry<SettingsE
     protected final Text keyword;
     private List<OrderedText> wrappedKeyword;
     private int lastWidth = -1;
-    protected final AbstractButtonWidget widgetButton;
-    protected final AbstractButtonWidget resetButton;
+    protected final ClickableWidget widgetButton;
+    protected final ClickableWidget resetButton;
 
-    public SettingsEntry(SettingsWidget list, Text keyword, AbstractButtonWidget widgetButton, AbstractButtonWidget resetButton) {
+    public SettingsEntry(SettingsWidget list, Text keyword, ClickableWidget widgetButton, ClickableWidget resetButton) {
         this.list = list;
         this.client = MinecraftClient.getInstance();
         this.keyword = keyword;
@@ -53,4 +53,8 @@ public class SettingsEntry extends AlwaysSelectedEntryListWidget.Entry<SettingsE
         this.resetButton.render(matrices,mouseX, mouseY, delta);
     }
 
+    @Override
+    public Text method_37006() {
+        return this.keyword;
+    }
 }

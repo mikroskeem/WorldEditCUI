@@ -142,8 +142,20 @@ public enum ConfiguredColour
 
 	private void updateLines()
 	{
-		this.normal = new LineStyle(RenderType.VISIBLE, 3.0f, this.colour.red(), this.colour.green(), this.colour.blue(), this.colour.alpha());
-		this.hidden = new LineStyle(RenderType.HIDDEN, 3.0f, this.colour.red() * 0.75F, this.colour.green() * 0.75F, this.colour.blue() * 0.75F, this.colour.alpha() * 0.25F);
+		this.hidden = new LineStyle(
+				RenderType.HIDDEN,
+				LineStyle.DEFAULT_WIDTH,
+				Math.round(this.colour.red() * 0.75f),
+				Math.round(this.colour.green() * 0.75F),
+				Math.round(this.colour.blue() * 0.75F),
+				Math.round(this.colour.alpha() * 0.25F));
+		this.normal = new LineStyle(
+				RenderType.VISIBLE,
+				LineStyle.DEFAULT_WIDTH,
+				this.colour.red(),
+				this.colour.green(),
+				this.colour.blue(),
+				this.colour.alpha());
 		this.lines = new LineStyle[] { this.hidden, this.normal };
 	}
 }

@@ -6,8 +6,8 @@ import com.mumfrey.worldeditcui.render.RenderStyle;
 import com.mumfrey.worldeditcui.util.Vector3;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Draws a polygon
@@ -39,10 +39,11 @@ public class Render3DPolygon extends RenderRegion
 				continue;
 			}
 			
-			buf.begin(GL11.GL_LINE_LOOP, VertexFormats.POSITION);
-			line.applyColour();
-			for (Vector3 vertex : this.vertices)
+			buf.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
+			line.applyColour(buf);
+			for (int i = 0; i < this.vertices.length + 1; i++) // Loop around by one vertex to compensate for LINE_STRIP instead of LINE_LOOP
 			{
+				final Vector3 vertex = this.vertices[i % this.vertices.length];
 				buf.vertex(vertex.getX() - ctx.cameraPos().getX(), vertex.getY() - ctx.cameraPos().getY(), vertex.getZ() - ctx.cameraPos().getZ()).next();
 			}
 			tessellator.draw();

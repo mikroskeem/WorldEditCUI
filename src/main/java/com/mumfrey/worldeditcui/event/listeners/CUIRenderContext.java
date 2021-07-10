@@ -1,5 +1,6 @@
 package com.mumfrey.worldeditcui.event.listeners;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mumfrey.worldeditcui.util.Vector3;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -13,7 +14,7 @@ import java.util.function.Consumer;
  */
 public final class CUIRenderContext {
     private Vector3 cameraPos;
-    private MatrixStack matrices;
+    private MatrixStack matrices = RenderSystem.getModelViewStack();
     private float dt;
 
     public Vector3 cameraPos() {
@@ -21,7 +22,11 @@ public final class CUIRenderContext {
     }
 
     public MatrixStack matrices() {
-        return this.matrices;
+        return RenderSystem.getModelViewStack();
+    }
+
+    public void applyMatrices() {
+        RenderSystem.applyModelViewMatrix();
     }
 
     public float dt() {

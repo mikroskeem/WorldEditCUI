@@ -55,11 +55,11 @@ public final class CUIDebug implements InitialisationFactory
 		}
 
 		final FileAppender appender = FileAppender.newBuilder()
-				.withName("WECUIDebug")
+				.setName("WECUIDebug")
 				.withFileName(debugFile.toAbsolutePath().toString())
 				.withCreateOnDemand(true)
-				.withFilter(new DebugModeEnabledFilter(this.controller.getConfiguration()))
-				.withLayout(layout)
+				.setFilter(new DebugModeEnabledFilter(this.controller.getConfiguration()))
+				.setLayout(layout)
 				.build();
 
 		appender.start();

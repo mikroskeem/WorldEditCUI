@@ -8,8 +8,8 @@ import com.mumfrey.worldeditcui.util.Observable;
 import com.mumfrey.worldeditcui.util.Vector3;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Draws a rectangular prism around 2 corners
@@ -76,27 +76,29 @@ public class Render3DBox extends RenderRegion
 			}
 			
 			// Draw bottom face
-			buf.begin(GL11.GL_LINE_LOOP, VertexFormats.POSITION);
-			line.applyColour();
+			buf.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
+			line.applyColour(buf);
 			buf.vertex(x1, y1, z1).next();
 			buf.vertex(x2, y1, z1).next();
 			buf.vertex(x2, y1, z2).next();
 			buf.vertex(x1, y1, z2).next();
+			buf.vertex(x1, y1, z1).next(); // Loop back for LINE_STRIP
 			tessellator.draw();
 			
 			// Draw top face
-			buf.begin(GL11.GL_LINE_LOOP, VertexFormats.POSITION);
-			line.applyColour();
+			buf.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
+			line.applyColour(buf);
 			buf.vertex(x1, y2, z1).next();
 			buf.vertex(x2, y2, z1).next();
 			buf.vertex(x2, y2, z2).next();
 			buf.vertex(x1, y2, z2).next();
+			buf.vertex(x1, y2, z1).next(); // Loop back for LINE_STRIP
 			tessellator.draw();
 			
 			// Draw join top and bottom faces
-			buf.begin(GL11.GL_LINES, VertexFormats.POSITION);
-			line.applyColour();
-			
+			buf.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION_COLOR);
+			line.applyColour(buf);
+
 			buf.vertex(x1, y1, z1).next();
 			buf.vertex(x1, y2, z1).next();
 			

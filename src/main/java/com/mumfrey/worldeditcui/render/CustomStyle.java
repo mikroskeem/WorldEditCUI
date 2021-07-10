@@ -34,8 +34,22 @@ public class CustomStyle implements RenderStyle
 	public void setColour(Colour colour)
 	{
 		this.colour = colour;
-		this.lines[0] = new LineStyle(RenderType.HIDDEN, 3.0f, colour.red() * 0.75F, colour.green() * 0.75F, colour.blue() * 0.75F, colour.alpha() * 0.25F);
-		this.lines[1] =	new LineStyle(RenderType.VISIBLE, 3.0f, colour.red(), colour.green(), colour.blue(), colour.alpha());
+		this.lines[0] = new LineStyle(
+			 RenderType.HIDDEN,
+			 LineStyle.DEFAULT_WIDTH,
+			 Math.round(colour.red() * 0.75F),
+			 Math.round(colour.green() * 0.75F),
+			 Math.round(colour.blue() * 0.75F),
+			 Math.round(colour.alpha() * 0.25F)
+		);
+		this.lines[1] =	new LineStyle(
+			 RenderType.VISIBLE,
+			 LineStyle.DEFAULT_WIDTH,
+			 colour.red(),
+			 colour.green(),
+			 colour.blue(),
+			 colour.alpha()
+		);
 	}
 	
 	@Override
